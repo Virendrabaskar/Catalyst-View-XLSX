@@ -1,0 +1,56 @@
+{
+   "abstract" : "Catalyst View for Microsoft Excel (XLSX) file",
+   "author" : [
+      "Baskar Nallathambi <baskarmusiri@gmail.com>"
+   ],
+   "dynamic_config" : 0,
+   "generated_by" : "ExtUtils::MakeMaker version 6.66, CPAN::Meta::Converter version 2.150001",
+   "license" : [
+      "perl_5"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "Catalyst-View-XLSX",
+   "no_index" : {
+      "directory" : [
+         "t",
+         "inc"
+      ]
+   },
+   "prereqs" : {
+      "build" : {
+         "requires" : {
+            "Catalyst" : "0",
+            "Catalyst::Test" : "0",
+            "Catalyst::View" : "0",
+            "Excel::Writer::XLSX" : "0",
+            "File::Spec" : "0",
+            "File::Temp" : "0",
+            "FindBin" : "0",
+            "Moose" : "0",
+            "Test::More" : "0",
+            "URI::Escape" : "0",
+            "strict" : "0",
+            "warnings" : "0"
+         }
+      },
+      "configure" : {
+         "requires" : {
+            "ExtUtils::MakeMaker" : "6.30"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "Catalyst::View" : "0",
+            "Excel::Writer::XLSX" : "0",
+            "File::Spec" : "0",
+            "File::Temp" : "0",
+            "URI::Escape" : "0"
+         }
+      }
+   },
+   "release_status" : "stable",
+   "version" : "1.0"
+}

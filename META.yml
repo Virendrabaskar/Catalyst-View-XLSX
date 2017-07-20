@@ -1,0 +1,49 @@
+---
+abstract: Catalyst View for Microsoft Excel (XLSX) file
+author:
+- Baskar Nallathambi <baskarmusiri@gmail.com>
+dynamic_config: 0
+license:
+- perl
+meta-spec:
+  url: http://search.cpan.org/perldoc?CPAN::Meta::Spec
+  version: '2'
+name: Catalyst-View-XLSX
+prereqs:
+  configure:
+    requires:
+      ExtUtils::MakeMaker: '6.30'
+  runtime:
+    requires:
+	Catalyst::View: '0'
+    	Excel::Writer::XLSX: '0'
+    	File::Spec: '0'                                                 
+	File::Temp: '0'
+    	URI::Escape:'0'      
+  test:
+    requires:
+      Catalyst: '0'
+      Catalyst::View: '0'
+      Catalyst::Runtime: '5.80'
+      Excel::Writer::XLSX: '0'
+      File::Spec: '0'                                                 
+      File::Temp: '0'
+      URI::Escape:'0'  
+      FindBin: '0'
+      Moose: '0'
+      Test::More: '0'
+      Catalyst::Test: '0'
+      strict: '0'
+      warnings: '0'
+release_status: stable
+resources:
+  bugtracker:
+    mailto: bug-Catalyst-View-XLSX@rt.cpan.org
+    web: http://rt.cpan.org/Public/Dist/Display.html?Name=Catalyst-View-XLSX
+  homepage: http://metacpan.org/release/Catalyst-View-XLSX
+  repository:
+    type: git
+    url: https://github.com/Virendrabaskar/Catalyst-View-XLSX.git
+    web: https://github.com/Virendrabaskar/Catalyst-View-XLSX
+version: '1.0'
+
