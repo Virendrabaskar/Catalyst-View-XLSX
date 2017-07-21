@@ -34,7 +34,7 @@ my %WriteMakefileArgs = (
     "File::Temp" => 0,                                                        
     "URI::Escape" => 0  
   },
-  "VERSION" => "1.0",
+  "VERSION" => "1.1",
   "test" => {
     "TESTS" => "t/*.t"
   }

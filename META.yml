@@ -45,5 +45,5 @@ resources:
     type: git
     url: https://github.com/Virendrabaskar/Catalyst-View-XLSX.git
     web: https://github.com/Virendrabaskar/Catalyst-View-XLSX
-version: '1.0'
+version: '1.1'
 

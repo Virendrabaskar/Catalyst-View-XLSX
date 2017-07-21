@@ -34,4 +34,4 @@ requires:
   File::Spec: '0'
   File::Temp: '0'
   URI::Escape: '0'
-version: '1.0'
+version: '1.1'
