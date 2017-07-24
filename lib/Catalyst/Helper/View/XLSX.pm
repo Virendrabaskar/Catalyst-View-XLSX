@@ -3,7 +3,7 @@ package Catalyst::Helper::View::XLSX;
 use strict;
 use warnings;
 
-our $VERSION = "1.1";
+our $VERSION = "1.2";
 
 =head1 NAME
 

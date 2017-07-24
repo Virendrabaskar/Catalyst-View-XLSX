@@ -2,21 +2,7 @@
 abstract: 'Catalyst View for Microsoft Excel (XLSX) file'
 author:
   - 'Baskar Nallathambi <baskarmusiri@gmail.com>'
-build_requires:
-  Catalyst: '0'
-  Catalyst::Test: '0'
-  Catalyst::View: '0'
-  Excel::Writer::XLSX: '0'
-  File::Spec: '0'
-  File::Temp: '0'
-  FindBin: '0'
-  Moose: '0'
-  Test::More: '0'
-  URI::Escape: '0'
-  strict: '0'
-  warnings: '0'
-configure_requires:
-  ExtUtils::MakeMaker: '6.30'
+build_requires: {}
 dynamic_config: 0
 generated_by: 'ExtUtils::MakeMaker version 6.66, CPAN::Meta::Converter version 2.150001'
 license: perl
@@ -28,10 +14,6 @@ no_index:
   directory:
     - t
     - inc
-requires:
-  Catalyst::View: '0'
-  Excel::Writer::XLSX: '0'
-  File::Spec: '0'
-  File::Temp: '0'
-  URI::Escape: '0'
-version: '1.1'
+resources:
+  repository: https://github.com/Virendrabaskar/Catalyst-View-XLSX
+version: '1.2'

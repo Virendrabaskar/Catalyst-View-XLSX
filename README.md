@@ -4,7 +4,7 @@ Catalyst::View::XLSX - Catalyst View for Microsoft Excel file
 
 # VERSION
 
-version 1.1
+version 1.2
 
 # SYNOPSIS
 

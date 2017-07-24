@@ -3,7 +3,7 @@ package Catalyst::View::XLSX;
 use Moose;
 extends 'Catalyst::View';
 
-our $VERSION = '1.1';
+our $VERSION = '1.2';
 
 use File::Temp;
 use URI::Escape;
@@ -114,7 +114,7 @@ Catalyst::View::XLSX - Catalyst View for Microsoft Excel file
 
 =head1 VERSION
 
-version 1.1
+version 1.2
 
 =head1 SYNOPSIS
 

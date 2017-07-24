@@ -13,15 +13,16 @@
 
 #     ABSTRACT => q[Catalyst View for Microsoft Excel (XLSX) file]
 #     AUTHOR => [q[Baskar Nallathambi <baskarmusiri@gmail.com>]]
-#     BUILD_REQUIRES => { File::Spec=>q[0], Catalyst::Test=>q[0], File::Temp=>q[0], warnings=>q[0], Catalyst=>q[0], strict=>q[0], Catalyst::View=>q[0], FindBin=>q[0], URI::Escape=>q[0], Test::More=>q[0], Excel::Writer::XLSX=>q[0], Moose=>q[0] }
+#     BUILD_REQUIRES => { Catalyst=>q[0], Catalyst::Test=>q[0], FindBin=>q[0], Excel::Writer::XLSX=>q[0], strict=>q[0], Test::More=>q[0], warnings=>q[0], URI::Escape=>q[0], File::Temp=>q[0], Moose=>q[0], Catalyst::Action::RenderView=>q[0], File::Spec=>q[0], Catalyst::View=>q[0] }
 #     CONFIGURE_REQUIRES => { ExtUtils::MakeMaker=>q[6.30] }
 #     DISTNAME => q[Catalyst-View-XLSX]
 #     EXE_FILES => []
 #     LICENSE => q[perl]
+#     META_MERGE => { meta-spec=>{ version=>q[2] }, resources=>{ repository=>{ web=>q[https://github.com/Virendrabaskar/Catalyst-View-XLSX], type=>q[git], url=>q[git@github.com:Virendrabaskar/Catalyst-View-XLSX.git] } } }
 #     NAME => q[Catalyst::View::XLSX]
-#     PREREQ_PM => { File::Temp=>q[0], Catalyst::Test=>q[0], File::Spec=>q[0], warnings=>q[0], strict=>q[0], Catalyst::View=>q[0], Catalyst=>q[0], FindBin=>q[0], URI::Escape=>q[0], Excel::Writer::XLSX=>q[0], Test::More=>q[0], Moose=>q[0] }
+#     PREREQ_PM => { Test::More=>q[0], Excel::Writer::XLSX=>q[0], strict=>q[0], URI::Escape=>q[0], warnings=>q[0], File::Temp=>q[0], Catalyst=>q[0], Catalyst::Test=>q[0], FindBin=>q[0], Catalyst::View=>q[0], File::Spec=>q[0], Moose=>q[0], Catalyst::Action::RenderView=>q[0] }
 #     TEST_REQUIRES => {  }
-#     VERSION => q[1.1]
+#     VERSION => q[1.2]
 #     test => { TESTS=>q[t/*.t] }
 
 # --- MakeMaker post_initialize section:
@@ -61,11 +62,11 @@ DIRFILESEP = /
 DFSEP = $(DIRFILESEP)
 NAME = Catalyst::View::XLSX
 NAME_SYM = Catalyst_View_XLSX
-VERSION = 1.1
+VERSION = 1.2
 VERSION_MACRO = VERSION
-VERSION_SYM = 1_1
+VERSION_SYM = 1_2
 DEFINE_VERSION = -D$(VERSION_MACRO)=\"$(VERSION)\"
-XS_VERSION = 1.1
+XS_VERSION = 1.2
 XS_VERSION_MACRO = XS_VERSION
 XS_DEFINE_VERSION = -D$(XS_VERSION_MACRO)=\"$(XS_VERSION)\"
 INST_ARCHLIB = blib/arch
@@ -193,12 +194,12 @@ TO_INST_PM = README.pod \
 	lib/Catalyst/Helper/View/XLSX.pm \
 	lib/Catalyst/View/XLSX.pm
 
-PM_TO_BLIB = lib/Catalyst/View/XLSX.pm \
+PM_TO_BLIB = lib/Catalyst/Helper/View/XLSX.pm \
+	blib/lib/Catalyst/Helper/View/XLSX.pm \
+	lib/Catalyst/View/XLSX.pm \
 	blib/lib/Catalyst/View/XLSX.pm \
 	README.pod \
-	$(INST_LIB)/Catalyst/View/README.pod \
-	lib/Catalyst/Helper/View/XLSX.pm \
-	blib/lib/Catalyst/Helper/View/XLSX.pm
+	$(INST_LIB)/Catalyst/View/README.pod
 
 
 # --- MakeMaker platform_constants section:
@@ -267,7 +268,7 @@ RCS_LABEL = rcs -Nv$(VERSION_SYM): -q
 DIST_CP = best
 DIST_DEFAULT = tardist
 DISTNAME = Catalyst-View-XLSX
-DISTVNAME = Catalyst-View-XLSX-1.1
+DISTVNAME = Catalyst-View-XLSX-1.2
 
 
 # --- MakeMaker macro section:
@@ -421,13 +422,13 @@ POD2MAN = $(POD2MAN_EXE)
 
 
 manifypods : pure_all  \
-	lib/Catalyst/Helper/View/XLSX.pm \
+	README.pod \
 	lib/Catalyst/View/XLSX.pm \
-	README.pod
+	lib/Catalyst/Helper/View/XLSX.pm
 	$(NOECHO) $(POD2MAN) --section=$(MAN3EXT) --perm_rw=$(PERM_RW) \
-	  lib/Catalyst/Helper/View/XLSX.pm $(INST_MAN3DIR)/Catalyst::Helper::View::XLSX.$(MAN3EXT) \
+	  README.pod $(INST_MAN3DIR)/Catalyst::View::README.$(MAN3EXT) \
 	  lib/Catalyst/View/XLSX.pm $(INST_MAN3DIR)/Catalyst::View::XLSX.$(MAN3EXT) \
-	  README.pod $(INST_MAN3DIR)/Catalyst::View::README.$(MAN3EXT) 
+	  lib/Catalyst/Helper/View/XLSX.pm $(INST_MAN3DIR)/Catalyst::Helper::View::XLSX.$(MAN3EXT) 
 
 
 
@@ -454,22 +455,22 @@ clean_subdirs :
 
 clean :: clean_subdirs
 	- $(RM_F) \
-	  blibdirs.ts *perl.core \
-	  $(BASEEXT).bso perl \
-	  so_locations MYMETA.json \
-	  pm_to_blib.ts mon.out \
-	  $(INST_ARCHAUTODIR)/extralibs.ld tmon.out \
-	  perlmain.c core.[0-9][0-9] \
-	  core.[0-9][0-9][0-9] perl$(EXE_EXT) \
-	  core.*perl.*.? core \
-	  $(BASEEXT).def *$(OBJ_EXT) \
-	  $(BASEEXT).x *$(LIB_EXT) \
-	  perl.exe core.[0-9] \
-	  $(INST_ARCHAUTODIR)/extralibs.all lib$(BASEEXT).def \
-	  core.[0-9][0-9][0-9][0-9] core.[0-9][0-9][0-9][0-9][0-9] \
-	  $(BOOTSTRAP) pm_to_blib \
+	  lib$(BASEEXT).def perl \
+	  core.[0-9] $(INST_ARCHAUTODIR)/extralibs.all \
+	  $(BASEEXT).exp core.[0-9][0-9][0-9] \
+	  $(INST_ARCHAUTODIR)/extralibs.ld core \
+	  core.[0-9][0-9] core.*perl.*.? \
+	  pm_to_blib pm_to_blib.ts \
+	  tmon.out perl$(EXE_EXT) \
+	  mon.out perlmain.c \
 	  $(MAKE_APERL_FILE) MYMETA.yml \
-	  $(BASEEXT).exp 
+	  perl.exe $(BASEEXT).bso \
+	  $(BASEEXT).x so_locations \
+	  $(BOOTSTRAP) blibdirs.ts \
+	  core.[0-9][0-9][0-9][0-9][0-9] core.[0-9][0-9][0-9][0-9] \
+	  *perl.core *$(LIB_EXT) \
+	  MYMETA.json $(BASEEXT).def \
+	  *$(OBJ_EXT) 
 	- $(RM_RF) \
 	  blib 
 	- $(MV) $(FIRST_MAKEFILE) $(MAKEFILE_OLD) $(DEV_NULL)
@@ -496,21 +497,7 @@ metafile : create_distdir
 	$(NOECHO) $(ECHO) 'abstract: '\''Catalyst View for Microsoft Excel (XLSX) file'\''' >> META_new.yml
 	$(NOECHO) $(ECHO) 'author:' >> META_new.yml
 	$(NOECHO) $(ECHO) '  - '\''Baskar Nallathambi <baskarmusiri@gmail.com>'\''' >> META_new.yml
-	$(NOECHO) $(ECHO) 'build_requires:' >> META_new.yml
-	$(NOECHO) $(ECHO) '  Catalyst: '\''0'\''' >> META_new.yml
-	$(NOECHO) $(ECHO) '  Catalyst::Test: '\''0'\''' >> META_new.yml
-	$(NOECHO) $(ECHO) '  Catalyst::View: '\''0'\''' >> META_new.yml
-	$(NOECHO) $(ECHO) '  Excel::Writer::XLSX: '\''0'\''' >> META_new.yml
-	$(NOECHO) $(ECHO) '  File::Spec: '\''0'\''' >> META_new.yml
-	$(NOECHO) $(ECHO) '  File::Temp: '\''0'\''' >> META_new.yml
-	$(NOECHO) $(ECHO) '  FindBin: '\''0'\''' >> META_new.yml
-	$(NOECHO) $(ECHO) '  Moose: '\''0'\''' >> META_new.yml
-	$(NOECHO) $(ECHO) '  Test::More: '\''0'\''' >> META_new.yml
-	$(NOECHO) $(ECHO) '  URI::Escape: '\''0'\''' >> META_new.yml
-	$(NOECHO) $(ECHO) '  strict: '\''0'\''' >> META_new.yml
-	$(NOECHO) $(ECHO) '  warnings: '\''0'\''' >> META_new.yml
-	$(NOECHO) $(ECHO) 'configure_requires:' >> META_new.yml
-	$(NOECHO) $(ECHO) '  ExtUtils::MakeMaker: '\''6.30'\''' >> META_new.yml
+	$(NOECHO) $(ECHO) 'build_requires: {}' >> META_new.yml
 	$(NOECHO) $(ECHO) 'dynamic_config: 1' >> META_new.yml
 	$(NOECHO) $(ECHO) 'generated_by: '\''ExtUtils::MakeMaker version 6.66, CPAN::Meta::Converter version 2.150001'\''' >> META_new.yml
 	$(NOECHO) $(ECHO) 'license: perl' >> META_new.yml
@@ -522,13 +509,9 @@ metafile : create_distdir
 	$(NOECHO) $(ECHO) '  directory:' >> META_new.yml
 	$(NOECHO) $(ECHO) '    - t' >> META_new.yml
 	$(NOECHO) $(ECHO) '    - inc' >> META_new.yml
-	$(NOECHO) $(ECHO) 'requires:' >> META_new.yml
-	$(NOECHO) $(ECHO) '  Catalyst::View: '\''0'\''' >> META_new.yml
-	$(NOECHO) $(ECHO) '  Excel::Writer::XLSX: '\''0'\''' >> META_new.yml
-	$(NOECHO) $(ECHO) '  File::Spec: '\''0'\''' >> META_new.yml
-	$(NOECHO) $(ECHO) '  File::Temp: '\''0'\''' >> META_new.yml
-	$(NOECHO) $(ECHO) '  URI::Escape: '\''0'\''' >> META_new.yml
-	$(NOECHO) $(ECHO) 'version: '\''1.1'\''' >> META_new.yml
+	$(NOECHO) $(ECHO) 'resources:' >> META_new.yml
+	$(NOECHO) $(ECHO) '  repository: https://github.com/Virendrabaskar/Catalyst-View-XLSX' >> META_new.yml
+	$(NOECHO) $(ECHO) 'version: '\''1.2'\''' >> META_new.yml
 	-$(NOECHO) $(MV) META_new.yml $(DISTVNAME)/META.yml
 	$(NOECHO) $(ECHO) Generating META.json
 	$(NOECHO) $(ECHO) '{' > META_new.json
@@ -552,40 +535,14 @@ metafile : create_distdir
 	$(NOECHO) $(ECHO) '         "inc"' >> META_new.json
 	$(NOECHO) $(ECHO) '      ]' >> META_new.json
 	$(NOECHO) $(ECHO) '   },' >> META_new.json
-	$(NOECHO) $(ECHO) '   "prereqs" : {' >> META_new.json
-	$(NOECHO) $(ECHO) '      "build" : {' >> META_new.json
-	$(NOECHO) $(ECHO) '         "requires" : {' >> META_new.json
-	$(NOECHO) $(ECHO) '            "Catalyst" : "0",' >> META_new.json
-	$(NOECHO) $(ECHO) '            "Catalyst::Test" : "0",' >> META_new.json
-	$(NOECHO) $(ECHO) '            "Catalyst::View" : "0",' >> META_new.json
-	$(NOECHO) $(ECHO) '            "Excel::Writer::XLSX" : "0",' >> META_new.json
-	$(NOECHO) $(ECHO) '            "File::Spec" : "0",' >> META_new.json
-	$(NOECHO) $(ECHO) '            "File::Temp" : "0",' >> META_new.json
-	$(NOECHO) $(ECHO) '            "FindBin" : "0",' >> META_new.json
-	$(NOECHO) $(ECHO) '            "Moose" : "0",' >> META_new.json
-	$(NOECHO) $(ECHO) '            "Test::More" : "0",' >> META_new.json
-	$(NOECHO) $(ECHO) '            "URI::Escape" : "0",' >> META_new.json
-	$(NOECHO) $(ECHO) '            "strict" : "0",' >> META_new.json
-	$(NOECHO) $(ECHO) '            "warnings" : "0"' >> META_new.json
-	$(NOECHO) $(ECHO) '         }' >> META_new.json
-	$(NOECHO) $(ECHO) '      },' >> META_new.json
-	$(NOECHO) $(ECHO) '      "configure" : {' >> META_new.json
-	$(NOECHO) $(ECHO) '         "requires" : {' >> META_new.json
-	$(NOECHO) $(ECHO) '            "ExtUtils::MakeMaker" : "6.30"' >> META_new.json
-	$(NOECHO) $(ECHO) '         }' >> META_new.json
-	$(NOECHO) $(ECHO) '      },' >> META_new.json
-	$(NOECHO) $(ECHO) '      "runtime" : {' >> META_new.json
-	$(NOECHO) $(ECHO) '         "requires" : {' >> META_new.json
-	$(NOECHO) $(ECHO) '            "Catalyst::View" : "0",' >> META_new.json
-	$(NOECHO) $(ECHO) '            "Excel::Writer::XLSX" : "0",' >> META_new.json
-	$(NOECHO) $(ECHO) '            "File::Spec" : "0",' >> META_new.json
-	$(NOECHO) $(ECHO) '            "File::Temp" : "0",' >> META_new.json
-	$(NOECHO) $(ECHO) '            "URI::Escape" : "0"' >> META_new.json
-	$(NOECHO) $(ECHO) '         }' >> META_new.json
+	$(NOECHO) $(ECHO) '   "release_status" : "stable",' >> META_new.json
+	$(NOECHO) $(ECHO) '   "resources" : {' >> META_new.json
+	$(NOECHO) $(ECHO) '      "repository" : {' >> META_new.json
+	$(NOECHO) $(ECHO) '         "type" : "git",' >> META_new.json
+	$(NOECHO) $(ECHO) '         "web" : "https://github.com/Virendrabaskar/Catalyst-View-XLSX"' >> META_new.json
 	$(NOECHO) $(ECHO) '      }' >> META_new.json
 	$(NOECHO) $(ECHO) '   },' >> META_new.json
-	$(NOECHO) $(ECHO) '   "release_status" : "stable",' >> META_new.json
-	$(NOECHO) $(ECHO) '   "version" : "1.1"' >> META_new.json
+	$(NOECHO) $(ECHO) '   "version" : "1.2"' >> META_new.json
 	$(NOECHO) $(ECHO) '}' >> META_new.json
 	-$(NOECHO) $(MV) META_new.json $(DISTVNAME)/META.json
 
@@ -862,6 +819,7 @@ ppd :
 	$(NOECHO) $(ECHO) '    <ABSTRACT>Catalyst View for Microsoft Excel (XLSX) file</ABSTRACT>' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '    <AUTHOR>Baskar Nallathambi &lt;baskarmusiri@gmail.com&gt;</AUTHOR>' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '    <IMPLEMENTATION>' >> $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Catalyst::Action::RenderView" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Catalyst::View" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Excel::Writer::XLSX" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <REQUIRE NAME="File::Spec" />' >> $(DISTNAME).ppd
@@ -877,9 +835,9 @@ ppd :
 
 pm_to_blib : $(FIRST_MAKEFILE) $(TO_INST_PM)
 	$(NOECHO) $(ABSPERLRUN) -MExtUtils::Install -e 'pm_to_blib({@ARGV}, '\''$(INST_LIB)/auto'\'', q[$(PM_FILTER)], '\''$(PERM_DIR)'\'')' -- \
+	  lib/Catalyst/Helper/View/XLSX.pm blib/lib/Catalyst/Helper/View/XLSX.pm \
 	  lib/Catalyst/View/XLSX.pm blib/lib/Catalyst/View/XLSX.pm \
-	  README.pod $(INST_LIB)/Catalyst/View/README.pod \
-	  lib/Catalyst/Helper/View/XLSX.pm blib/lib/Catalyst/Helper/View/XLSX.pm 
+	  README.pod $(INST_LIB)/Catalyst/View/README.pod 
 	$(NOECHO) $(TOUCH) pm_to_blib
 
 

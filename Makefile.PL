@@ -3,6 +3,19 @@ use warnings;
 use ExtUtils::MakeMaker 6.30;
 
 
+my $meta_merge = {
+    META_MERGE => {
+        'meta-spec' => { version => 2 },
+        resources => {
+            repository  =>  {
+                type => 'git',
+                url => 'git@github.com:Virendrabaskar/Catalyst-View-XLSX.git',
+                web => 'https://github.com/Virendrabaskar/Catalyst-View-XLSX'
+            },
+        },
+    }
+};
+
 my %WriteMakefileArgs = (
   "ABSTRACT" => "Catalyst View for Microsoft Excel (XLSX) file",
   "AUTHOR" => "Baskar Nallathambi <baskarmusiri\@gmail.com>",
@@ -17,6 +30,7 @@ my %WriteMakefileArgs = (
     "Moose" => 0,
     "Test::More" => 0,
     "Catalyst::Test" => 0,
+    "Catalyst::Action::RenderView" => 0,
     "strict" => 0,
     "warnings" => 0
   },
@@ -29,12 +43,13 @@ my %WriteMakefileArgs = (
   "NAME" => "Catalyst::View::XLSX",
   "PREREQ_PM" => {
     "Catalyst::View" => 0,
+    "Catalyst::Action::RenderView" => 0,
     "Excel::Writer::XLSX" => 0,
     "File::Spec" => 0,                                                        
     "File::Temp" => 0,                                                        
     "URI::Escape" => 0  
   },
-  "VERSION" => "1.1",
+  "VERSION" => "1.2",
   "test" => {
     "TESTS" => "t/*.t"
   }
@@ -57,7 +72,8 @@ unless ( eval { ExtUtils::MakeMaker->VERSION(6.56) } ) {
 delete $WriteMakefileArgs{CONFIGURE_REQUIRES}
   unless eval { ExtUtils::MakeMaker->VERSION(6.52) };
 
-  WriteMakefile(%WriteMakefileArgs);
+  WriteMakefile(%WriteMakefileArgs,
+      $ExtUtils::MakeMaker::VERSION >= 6.50 ? (%$meta_merge) : ());
 
 
 
